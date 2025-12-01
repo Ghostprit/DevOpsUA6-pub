@@ -1,0 +1,13 @@
+{
+    "student": {
+        "name": "John Doe",
+        "age": "17",
+        "grade": "11th",
+        "subjects": [
+            "English",
+            "Biology",
+            "Mathematics",
+            "Physics"
+        ]
+    }
+}
