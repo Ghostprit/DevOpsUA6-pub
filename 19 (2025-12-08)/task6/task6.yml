@@ -1,0 +1,55 @@
+---
+- name: Installing and configuring web servers
+  hosts: all
+  become: true
+  tasks:
+    
+    - name: Installing NGINX
+      apt:
+        name: nginx
+        state: present
+    
+    - name: Running NGINX
+      service:
+        name: nginx
+        state: started
+    
+    - name: Adding some HTML for NGINX
+      copy:
+        content: "Some information"
+        dest: /usr/share/nginx/html/index.html
+
+    - name: Installing Apache
+      apt:
+        name: apache2
+        state: present
+
+    - name: Configuring Apache's ports
+      lineinfile:
+        path: /etc/apache2/ports.conf
+        regexp: '^Listen 80$'
+        line: 'Listen 8080'
+      # notify: Restart Apache
+
+    - name: Configuring Apache's virtual host port
+      lineinfile:
+        path: /etc/apache2/sites-available/000-default.conf
+        regexp: '^<VirtualHost \*:80>$'
+        line: '<VirtualHost *:8080>'
+      notify: Restart Apache
+    
+    - name: Running Apache
+      service:
+        name: apache2
+        state: started
+
+    - name: Adding some HTMl for Apache
+      copy:
+        content: Some information
+        dest: /var/www/html/index.html
+
+  handlers:
+    - name: Restart Apache
+      service:
+        name: apache2
+        state: restarted

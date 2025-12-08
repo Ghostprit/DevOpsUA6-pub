@@ -1,0 +1,14 @@
+---
+- name: Task 2
+  hosts: vm-task2
+  become: true
+  tasks:
+    - name: Installing NGINX
+      apt:
+        name: nginx
+        state: present
+    
+    - name: Starting NGINX
+      service:
+        name: nginx
+        state: started
