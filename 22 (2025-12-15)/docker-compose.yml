@@ -1,0 +1,49 @@
+services:
+  mysql:
+    image: mysql:8.0
+    restart: unless-stopped
+    environment:
+      MYSQL_HOST: mysql
+      MYSQL_PORT: 3306
+      MYSQL_ROOT_PASSWORD: pass123
+      MYSQL_DATABASE: appdb
+    ports:
+      - "3307:3306"
+    networks:
+      - task-network
+    volumes:
+      - ./script.sql:/docker-entrypoint-initdb.d/script.sql
+      - db_data:/var/lib/mysql
+
+  backend:
+    build: ./backend
+    restart: unless-stopped
+    environment:
+      DB_HOST: mysql
+      DB_PORT: 3306
+      DB_USER: root
+      DB_PASSWORD: pass123
+      DB_NAME: appdb
+    ports:
+      - "3000:3000"
+    networks:
+      - task-network
+    depends_on:
+      - mysql
+  
+  frontend:
+    build: ./frontend
+    restart: unless-stopped
+    ports:
+      - "3001:80"
+    networks:
+      - task-network
+    depends_on:
+      - backend
+
+volumes:
+  db_data:
+
+networks:
+    task-network:
+      driver: bridge
