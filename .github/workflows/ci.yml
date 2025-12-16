@@ -6,6 +6,9 @@ jobs:
   test:
     name: Testing part
     runs-on: ubuntu:latest
+    defaults:
+      run: 
+        working-directory: 23 (2025-12-16)
     steps:
       - name: Chekout repository
         uses: actions/checkout@v6
