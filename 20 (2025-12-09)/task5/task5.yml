@@ -1,0 +1,8 @@
+---
+- name: Error handling playbook
+  hosts: localhost
+  gather_facts: false
+  tasks:
+    - name: Failed command
+      command: /bin/false
+      ignore_errors: yes

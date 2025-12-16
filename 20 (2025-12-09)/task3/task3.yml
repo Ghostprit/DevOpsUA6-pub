@@ -1,0 +1,8 @@
+---
+- name: Writing a playbook for task 3
+  hosts: localhost
+  vars_files:
+    - secret.yml
+  tasks:
+    - debug:
+        var: a_secret

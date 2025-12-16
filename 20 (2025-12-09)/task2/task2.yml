@@ -1,0 +1,30 @@
+---
+- name: Writing a playbook using group_vars
+  hosts: all
+  gather_facts: false
+  tasks:
+    - name: Check group_vars directory exists
+      ansible.builtin.stat:
+        path: "/home/bartas/Documents/DevOpsUA6/20 (2025-12-09)/task2/group_vars"
+      register: gvars_dir
+      run_once: true
+      
+    - name: Show group_vars presence
+      debug:
+        msg: "group_vars directory exists: {{ gvars_dir.stat.exists }}"
+      run_once: true
+
+    - name: Display group variable
+      debug:
+        msg: "The value of my_group_var is {{ my_group_var }}"
+      run_once: true
+
+    - name: Display group1 variable
+      debug:
+        msg: "The value of group1_var is {{ group1_var}}"
+      run_once: true
+
+    - name: Display group2 variable
+      debug:
+        msg: "The value of group2_var is {{ group2_var}}"
+      run_once: true
