@@ -30,5 +30,4 @@ jobs:
           tags: |
             ${{ vars.DOCKERUSER }}/devopsua6-pub:latest
             ${{ vars.DOCKERUSER }}/devopsua6-pub:${{ github.sha }}
-
-    
+      
