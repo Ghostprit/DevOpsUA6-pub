@@ -3,8 +3,8 @@ name: Docker CI/CD
 on: [push, pull_request, workflow_dispatch]
 
 jobs:
-  test:
-    name: Testing part
+  build:
+    name: Building part
     runs-on: ubuntu-latest
     defaults:
       run: 
@@ -39,3 +39,5 @@ jobs:
       - name: Installing dependencies
         run: |
           pip install -r requirements.txt
+
+    
