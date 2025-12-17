@@ -27,7 +27,9 @@ jobs:
         with:
           context: './23 (2025-12-16)'
           push: true
-          tags: user/app:latest
+          tags: |
+            ${{ vars.DOCKERUSER }}/devopsua6-pub:latest
+            ${{ vars.DOCKERUSER }}/devopsua6-pub:${{ github.sha }}
 
       - name: Setting up Python
         uses: actions/setup-python@v6
