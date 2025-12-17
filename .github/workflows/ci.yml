@@ -25,6 +25,7 @@ jobs:
       - name: Docker build and push
         uses: docker/build-push-action@v6
         with:
+          context: './23 (2025-12-16)'
           push: true
           tags: user/app:latest
 
